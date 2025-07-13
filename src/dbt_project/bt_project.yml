@@ -1,0 +1,30 @@
+name: 'telegram_analysis'
+version: '1.0.0'
+
+profile: 'default'
+
+model-paths:
+  - "models"
+
+seed-paths:
+  - "seeds"
+
+analysis-paths:
+  - "analyses"
+
+macro-paths:
+  - "macros"
+
+snapshot-paths:
+  - "snapshots"
+
+target-path: "target"
+clean-targets:
+  - "target"
+  - "dbt_packages"
+
+tests:
+  not_null:
+    tags: ["not_null"]
+  unique:
+    tags: ["unique"]
