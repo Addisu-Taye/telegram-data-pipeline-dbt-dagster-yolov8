@@ -22,7 +22,7 @@
 WITH date_spine AS (
     -- Generate a list of all unique message dates from the staging messages table
     SELECT DISTINCT
-        (TO_DATE(date::text, 'YYYY-MM-DD')) AS date
+        (TO_DATE(message_date::text, 'YYYY-MM-DD')) AS date
     FROM "telegram_data"."public"."stg_telegram_messages"
     WHERE message_date IS NOT NULL
 
