@@ -68,8 +68,8 @@ async def download_images(channel_username):
 if __name__ == "__main__":
     # List of channels to scrape images from
     channels = [
-        #'chemed123',
-       # 'lobelia4cosmetics',
+        'chemed123',
+       'lobelia4cosmetics',
         'tikvahpharma'
     ]
 
