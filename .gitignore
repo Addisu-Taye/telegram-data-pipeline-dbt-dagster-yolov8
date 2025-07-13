@@ -1,0 +1,15 @@
+# File Path: .gitignore
+# Date: 10 July 2025
+# Developed by: Addisu Taye Dadi
+# Purpose: Prevent sensitive or unnecessary files from being committed to Git.
+# Key Features:
+# - Ignores environment files, logs, Python cache, and Docker volumes.
+
+.env
+__pycache__
+*.pyc
+*.log
+*.db
+data/processed/
+data/images/
+src/yolo/runs/
