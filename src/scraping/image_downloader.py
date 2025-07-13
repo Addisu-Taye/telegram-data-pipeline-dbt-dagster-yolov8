@@ -1,6 +1,6 @@
 # File Path: src/scraping/image_downloader.py
 # Date: 10 July 2025
-# Developed by: Addisu Taye Dadi
+# Developed by: Addisu Taye
 # Purpose: Download images from Telegram messages.
 # Key Features:
 # - Extracts media URLs from scraped messages.

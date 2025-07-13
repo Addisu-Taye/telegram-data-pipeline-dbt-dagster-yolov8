@@ -1,6 +1,6 @@
 # File Path: src/scraping/telegram_scraper.py
 # Date: 10 July 2025
-# Developed by: Addisu Taye Dadi
+# Developed by: Addisu Taye
 # Purpose: Scrape public Telegram channels using Telethon.
 # Key Features:
 # - Scrapes messages and images from specified Ethiopian medical channels.
