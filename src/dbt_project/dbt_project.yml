@@ -1,7 +1,7 @@
 name: 'telegram_analysis'
 version: '1.0.0'
 
-profile: 'default'
+profile: 'telegram_pipeline'
 
 model-paths:
   - "models"

@@ -1,5 +1,5 @@
 WITH raw_data AS (
-    SELECT * FROM {{ source('public', 'telegram_messages') }}
+    SELECT * FROM "telegram_data"."public"."telegram_messages"
 )
 SELECT
     (message_json->>'id')::INT AS message_id,

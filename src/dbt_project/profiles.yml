@@ -1,0 +1,16 @@
+# E:\10_Academy\Week-07\telegram-data-pipeline-dbt-dagster-yolov8\src\dbt_project\profiles.yml
+
+telegram_pipeline:
+  target: dev
+  outputs:
+    dev:
+      type: postgres
+      threads: 4
+      host: "{{ env_var('DB_HOST') }}"
+      # --- Change this line ---
+      port: "{{ env_var('DB_PORT') | int }}"
+      # ------------------------
+      user: "{{ env_var('DB_USER') }}"
+      pass: "{{ env_var('DB_PASSWORD') }}"
+      dbname: "{{ env_var('DB_NAME') }}"
+      schema: public
