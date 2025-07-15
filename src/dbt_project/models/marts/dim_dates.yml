@@ -1,0 +1,38 @@
+version: 2
+
+models:
+  - name: dim_dates
+    description: "Date dimension table enriched with calendar attributes"
+    columns:
+      - name: date
+        description: "Calendar date"
+        tests:
+          - not_null
+          - unique
+
+      - name: year
+        description: "Year extracted from date"
+
+      - name: quarter
+        description: "Quarter of the year (1-4)"
+
+      - name: month
+        description: "Month number (1-12)"
+
+      - name: month_name
+        description: "Full name of the month"
+
+      - name: week_of_year
+        description: "Week number in the year"
+
+      - name: day_of_month
+        description: "Day number in the month"
+
+      - name: day_of_week
+        description: "ISO weekday number (1=Monday, 7=Sunday)"
+
+      - name: weekday_name
+        description: "Full name of the weekday"
+
+      - name: is_weekend
+        description: "Boolean flag indicating whether the date is a weekend"

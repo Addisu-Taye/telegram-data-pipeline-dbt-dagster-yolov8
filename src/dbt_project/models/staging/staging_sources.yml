@@ -1,9 +1,0 @@
-# src/dbt_project/models/staging/staging_sources.yml
-
-version: 2
-
-sources:
-  - name: public 
-    # database: "{{ env_var('DB_NAME') }}" <-- Remove this line
-    tables:
-      - name: telegram_messages

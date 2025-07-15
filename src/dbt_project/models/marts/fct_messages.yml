@@ -1,0 +1,26 @@
+version: 2
+
+models:
+  - name: fct_messages
+    description: "Fact table for Telegram messages, joined with channel and date dimensions"
+    columns:
+      - name: message_id
+        description: "Unique ID of the Telegram message"
+        tests:
+          - not_null
+          - unique
+
+      - name: message_text
+        description: "Content of the Telegram message"
+        tests:
+          - not_null
+
+      - name: message_date
+        description: "Date and time the message was sent"
+        tests:
+          - not_null
+
+      - name: channel
+        description: "Channel from which the message originated"
+        tests:
+          - not_null
