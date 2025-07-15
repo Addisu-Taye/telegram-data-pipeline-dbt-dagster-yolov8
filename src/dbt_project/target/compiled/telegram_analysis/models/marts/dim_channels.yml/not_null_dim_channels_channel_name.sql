@@ -4,8 +4,8 @@
 
 
 
-select channel
+select channel_name
 from "telegram_data"."raw"."dim_channels"
-where channel is null
+where channel_name is null
 
 

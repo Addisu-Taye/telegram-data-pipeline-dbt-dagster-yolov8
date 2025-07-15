@@ -44,7 +44,7 @@ async def download_images(channel_username):
             logging.info(f"Connected to channel: {channel_username}")
 
             # Create a directory for storing images
-            media_dir = f"data/images/{channel.username}/"
+            media_dir = f"data/images1/{channel.username}/"
             os.makedirs(media_dir, exist_ok=True)
             logging.info(f"Created image directory: {media_dir}")
 

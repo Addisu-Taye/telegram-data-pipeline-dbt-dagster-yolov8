@@ -7,20 +7,29 @@ models:
       - name: message_id
         description: "Unique ID of the Telegram message"
         tests:
-          - not_null
-          - unique
+          - not_null:
+              tags: [not_null]
+          - unique:
+              tags: [unique]
 
       - name: message_text
         description: "Content of the Telegram message"
         tests:
-          - not_null
+          - not_null:
+              tags: [not_null]
 
       - name: message_date
         description: "Date and time the message was sent"
         tests:
-          - not_null
+          - not_null:
+              tags: [not_null]
 
-      - name: channel
-        description: "Channel from which the message originated"
+      - name: channel_id
+        description: "Foreign key to dim_channels"
         tests:
-          - not_null
+          - not_null:
+              tags: [not_null]
+          - relationships:
+              to: ref('dim_channels')
+              field: channel_id
+              tags: [relationships]

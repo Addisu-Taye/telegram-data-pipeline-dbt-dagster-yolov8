@@ -4,8 +4,8 @@
 
 
 
-select channel
+select channel_id
 from "telegram_data"."raw"."fct_messages"
-where channel is null
+where channel_id is null
 
 

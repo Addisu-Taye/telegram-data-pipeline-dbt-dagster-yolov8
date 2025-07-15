@@ -1,17 +1,107 @@
-version: 1
+version: 2
 
 models:
+  - name: stg_telegram_messages
+    description: "Cleaned and lightly transformed Telegram messages"
+    columns:
+      - name: message_id
+        description: "Unique identifier for each message"
+        tests:
+          - unique:
+              tags: ["unique"]
+          - not_null:
+              tags: ["not_null"]
+      - name: message_text
+        description: "Text content of the message"
+        tests:
+          - not_null:
+              tags: ["not_null"]
+      - name: message_date
+        description: "Date the message was posted"
+        tests:
+          - not_null:
+              tags: ["not_null"]
+      - name: channel
+        description: "Name of the Telegram channel"
+        tests:
+          - not_null:
+              tags: ["not_null"]
+
+  - name: dim_channels
+    description: "Dimension table listing all scraped Telegram channels"
+    columns:
+      - name: channel_id
+        description: "Surrogate key for each channel"
+        tests:
+          - unique:
+              tags: ["unique"]
+          - not_null:
+              tags: ["not_null"]
+      - name: channel_name
+        description: "Name of the Telegram channel"
+        tests:
+          - unique:
+              tags: ["unique"]
+          - not_null:
+              tags: ["not_null"]
+
   - name: dim_dates
-    description: "Date dimension table used for time-based analysis"
+    description: "Date dimension table enriched with calendar attributes"
     columns:
       - name: date
-        description: "Full date key used for joining with fact tables"
+        description: "Calendar date"
         tests:
-          - unique
-          - not_null
+          - not_null:
+              tags: ["not_null"]
+          - unique:
+              tags: ["unique"]
       - name: year
-        description: "Year part of the date"
+        description: "Year extracted from date"
+      - name: quarter
+        description: "Quarter of the year (1-4)"
       - name: month
         description: "Month number (1-12)"
+      - name: month_name
+        description: "Full name of the month"
+      - name: week_of_year
+        description: "Week number in the year"
+      - name: day_of_month
+        description: "Day number in the month"
+      - name: day_of_week
+        description: "ISO weekday number (1=Monday, 7=Sunday)"
+      - name: weekday_name
+        description: "Full name of the weekday"
       - name: is_weekend
-        description: "Boolean indicating if the date falls on a weekend"
+        description: "Boolean flag indicating whether the date is a weekend"
+
+  - name: fct_messages
+    description: "Fact table containing one row per message"
+    columns:
+      - name: message_id
+        description: "Foreign key to stg_telegram_messages"
+        tests:
+          - unique:
+              tags: ["unique"]
+          - not_null:
+              tags: ["not_null"]
+      - name: message_text
+        description: "Text content of the message"
+        tests:
+          - not_null:
+              tags: ["not_null"]
+      - name: message_date
+        description: "Date when the message was posted"
+        tests:
+          - not_null:
+              tags: ["not_null"]
+          - relationships:
+              to: ref('dim_dates')
+              field: date
+      - name: channel_id
+        description: "Foreign key to dim_channels"
+        tests:
+          - not_null:
+              tags: ["not_null"]
+          - relationships:
+              to: ref('dim_channels')
+              field: channel_id

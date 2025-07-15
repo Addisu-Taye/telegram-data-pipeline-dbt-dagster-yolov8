@@ -1,0 +1,8 @@
+selectors:
+  - name: not_null
+    description: "Run only not_null tests"
+    definition:
+      method: tag
+      value: not_null
+      filter:
+        kind: test
