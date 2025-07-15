@@ -1,13 +1,12 @@
 # 📄 End-to-End Data Pipeline for Ethiopian Medical Telegram Channels
 
-
 ---
 
 ## 🎯 Project Overview
 
 This repository contains a professional, end-to-end data pipeline that scrapes public Ethiopian medical Telegram channels, transforms and models the data using **dbt**, enriches visual content with **YOLOv8**, exposes insights via a **FastAPI** service, and orchestrates everything using **Dagster**.
 
-### Business Questions Answered:
+### Business Questions Answered
 
 - What are the top 10 most frequently mentioned medical products?  
 - How does product availability vary across channels?  
@@ -49,6 +48,7 @@ This repository contains a professional, end-to-end data pipeline that scrapes p
 
 ### ⚙️ Layered Architecture (Modern ELT)
 
+```
 Telegram API
 → JSON Data Lake
 → PostgreSQL (raw)
@@ -56,21 +56,16 @@ Telegram API
 → YOLOv8 (image detection)
 → FastAPI (analytics)
 → Dagster (orchestration)
-
-yaml
-Copy
-Edit
+```
 
 ---
 
 ### 🗃️ Data Lake Structure
 
-data/raw/telegram_messages/YYYY-MM-DD/channel_name.json
-data/raw/images/channel_name/message_id.jpg
-
-yaml
-Copy
-Edit
+```
+data/raw/telegram_messages/YYYY-MM-DD/channel_name.json  
+data/raw/images/channel_name/message_id.jpg  
+```
 
 ---
 
@@ -98,7 +93,7 @@ Includes tests: `not_null`, `unique`, and custom SQL assertions.
 - `/api/channels/{channel_name}/activity`  
 - `/api/search/messages?query=paracetamol`  
 
-All endpoints use Pydantic for validation and documentation.
+All endpoints use **Pydantic** for validation and documentation.
 
 ---
 
@@ -108,11 +103,10 @@ Defined as individual `ops`:
 - `scrape_telegram_data`  
 - `load_raw_to_postgres`  
 - `run_dbt_transformations`  
-- `run_yolo_enrichment`
+- `run_yolo_enrichment`  
 
-Managed via Dagster UI: http://localhost:3000
+Managed via Dagster UI: [http://localhost:3000](http://localhost:3000)
 
----
 
 ## 📁 Folder Structure
 
@@ -169,6 +163,24 @@ DB_PORT=5432
 
 ```bash
 pip install -r requirements.txt
+```
+
+#### `requirements.txt`
+
+```txt
+telethon
+psycopg2-binary
+pyyaml
+fastapi
+uvicorn
+sqlalchemy
+pydantic
+python-dotenv
+ultralytics
+dbt-core
+dbt-postgres
+dagster
+dagster-webserver
 ```
 
 ---
@@ -307,8 +319,8 @@ MIT License
 
 ## 📬 Contact
 
-  
-- **Email**: addtaye@gmail.com 
+- **LinkedIn**: Addisu Taye Dadi  
+- **Email**: addisu.taye.dadi@gmail.com  
 
 ---
 
