@@ -1,9 +1,5 @@
-# 📄 README.md for GitHub
+# 📄 End-to-End Data Pipeline for Ethiopian Medical Telegram Channels
 
-**Project:** Telegram Data Pipeline – dbt, Dagster, YOLOv8, FastAPI  
-**Author:** Addisu Taye Dadi  
-**Date:** July 15, 2025  
-**For:** Kara Solutions – KAIM Week 7 Challenge  
 
 ---
 
@@ -120,27 +116,25 @@ Managed via Dagster UI: http://localhost:3000
 
 ## 📁 Folder Structure
 
+```
 .
 ├── .gitignore
 ├── .env.example
 ├── requirements.txt
 ├── README.md
 ├── data/
-│ └── raw/
-│ ├── telegram_messages/YYYY-MM-DD/channel.json
-│ └── images/channel_name/message_id.jpg
+│   └── raw/
+│       ├── telegram_messages/YYYY-MM-DD/channel.json
+│       └── images/channel_name/message_id.jpg
 ├── src/
-│ ├── scraping/
-│ ├── yolo/
-│ ├── dbt_project/
-│ │ ├── models/staging/
-│ │ └── models/marts/
-│ ├── api/
-│ └── dagster_pipeline/
-
-yaml
-Copy
-Edit
+│   ├── scraping/
+│   ├── yolo/
+│   ├── dbt_project/
+│   │   ├── models/staging/
+│   │   └── models/marts/
+│   ├── api/
+│   └── dagster_pipeline/
+```
 
 ---
 
@@ -151,16 +145,17 @@ Edit
 ```bash
 git clone https://github.com/Addisu-Taye/telegram-data-pipeline-dbt-dagster-yolov8.git
 cd telegram-data-pipeline-dbt-dagster-yolov8
-2. Configure Environment
-bash
-Copy
-Edit
-cp .env.example .env
-Edit .env with your credentials:
+```
 
-env
-Copy
-Edit
+### 2. Configure Environment
+
+```bash
+cp .env.example .env
+```
+
+Edit `.env` with your credentials:
+
+```env
 TELEGRAM_API_ID=your_api_id
 TELEGRAM_API_HASH=your_api_hash
 DB_NAME=telegram_data
@@ -168,71 +163,86 @@ DB_USER=admin
 DB_PASSWORD=adminpass
 DB_HOST=localhost
 DB_PORT=5432
-3. Install Requirements
-bash
-Copy
-Edit
+```
+
+### 3. Install Requirements
+
+```bash
 pip install -r requirements.txt
-🧪 Running the Pipeline
-1. PostgreSQL Setup
-sql
-Copy
-Edit
+```
+
+---
+
+## 🧪 Running the Pipeline
+
+### 1. PostgreSQL Setup
+
+```sql
 CREATE USER admin WITH PASSWORD 'adminpass';
 CREATE DATABASE telegram_data OWNER admin;
-2. Scrape Telegram Data
-bash
-Copy
-Edit
+```
+
+### 2. Scrape Telegram Data
+
+```bash
 cd src/scraping
 python telegram_scraper.py
-3. Download Images
-bash
-Copy
-Edit
+```
+
+### 3. Download Images
+
+```bash
 python image_downloader.py
-4. Load Raw Data to PostgreSQL
-bash
-Copy
-Edit
+```
+
+### 4. Load Raw Data to PostgreSQL
+
+```bash
 python load_data.py
-5. Run dbt Transformations
-bash
-Copy
-Edit
+```
+
+### 5. Run dbt Transformations
+
+```bash
 cd src/dbt_project
 dbt debug
 dbt run
 dbt test
 dbt docs generate
-Open: target/index.html
+```
 
-6. Run YOLOv8 Image Analysis
-bash
-Copy
-Edit
+Open: `target/index.html`
+
+### 6. Run YOLOv8 Image Analysis
+
+```bash
 cd src/yolo
 python image_analyzer.py
-7. Start FastAPI Server
-bash
-Copy
-Edit
+```
+
+### 7. Start FastAPI Server
+
+```bash
 cd src/api
 uvicorn main:app --reload
-Visit: http://localhost:8000/docs
+```
 
-8. Launch Dagster UI
-bash
-Copy
-Edit
+Visit: [http://localhost:8000/docs](http://localhost:8000/docs)
+
+### 8. Launch Dagster UI
+
+```bash
 cd src/dagster_pipeline
 dagster dev
-Visit: http://localhost:3000
+```
 
-🖼 Star Schema (Mermaid Format)
-mermaid
-Copy
-Edit
+Visit: [http://localhost:3000](http://localhost:3000)
+
+---
+
+## 🖼 Star Schema (Mermaid Format)
+
+```mermaid
 erDiagram
     fct_messages {
         INT message_id PK
@@ -254,46 +264,57 @@ erDiagram
     }
     fct_messages ||--o{ dim_channels : "belongs to"
     fct_messages ||--o{ dim_dates : "belongs to"
-📊 Business Insights Delivered
-Insight	Endpoint
-Top 10 mentioned products	/api/reports/top-products
-Posting activity by channel	/api/channels/{channel}/activity
-Search by medical keyword	/api/search/messages?query=paracetamol
-Visual object detection by message	Stored in fct_image_detections
+```
 
-🧠 Challenges Encountered
-⚠️ Telegram API rate limiting
+---
 
-⚙️ dbt schema normalization for JSON
+## 📊 Business Insights Delivered
 
-🐞 YOLOv8 model file corruption
+| Insight                          | Endpoint                                             |
+|----------------------------------|------------------------------------------------------|
+| Top 10 mentioned products        | `/api/reports/top-products`                         |
+| Posting activity by channel      | `/api/channels/{channel}/activity`                  |
+| Search by medical keyword        | `/api/search/messages?query=paracetamol`            |
+| Visual object detection by msg   | Stored in `fct_image_detections`                    |
 
-🧪 Local environment and Docker PostgreSQL sync
+---
 
-💡 Learning Outcomes
-Built a layered, modular data pipeline
+## 🧠 Challenges Encountered
 
-Applied dbt testing and documentation
+- ⚠️ Telegram API rate limiting  
+- ⚙️ dbt schema normalization for JSON  
+- 🐞 YOLOv8 model file corruption  
+- 🧪 Local environment and Docker PostgreSQL sync  
 
-Enriched unstructured data with computer vision
+---
 
-Delivered insights via robust APIs
+## 💡 Learning Outcomes
 
-Orchestrated all components using Dagster
+- Built a layered, modular data pipeline  
+- Applied dbt testing and documentation  
+- Enriched unstructured data with computer vision  
+- Delivered insights via robust APIs  
+- Orchestrated all components using Dagster  
+- Documented and versioned each step  
 
-Documented and versioned each step
+---
 
-📋 License
+## 📋 License
+
 MIT License
 
-📬 Contact
-LinkedIn: Addisu Taye Dadi
+---
 
-Email: addisu.taye.dadi@gmail.com
+## 📬 Contact
 
-🧩 Acknowledgements
+  
+- **Email**: addtaye@gmail.com 
+
+---
+
+## 🧩 Acknowledgements
+
 Thanks to:
 
-10 Academy & KAIM Team
-
-Mentors: Mahlet, Rediet, Kerod, Rehmet
+- 10 Academy & KAIM Team  
+- Mentors: Mahlet, Rediet, Kerod, Rehmet  
