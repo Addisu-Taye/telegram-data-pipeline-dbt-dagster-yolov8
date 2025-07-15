@@ -10,6 +10,7 @@ __pycache__
 *.pyc
 *.log
 *.db
+*.pt
 data/processed/
 data/images/
 src/yolo/runs/
