@@ -319,8 +319,8 @@ MIT License
 
 ## 📬 Contact
 
-- **LinkedIn**: Addisu Taye Dadi  
-- **Email**: addisu.taye.dadi@gmail.com  
+
+- **Email**: addtaye@gmail.com  
 
 ---
 
